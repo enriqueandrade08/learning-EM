@@ -53,7 +53,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 }
                 break;
-
+            case 'U':
+                // Actualizar los datos del usuario
+                // Recibo y limpio variables
+                $cod = base64_decode($_POST["cod"]);
+                $nombre = strip_tags($_POST['nombre']);
+                $apellido = strip_tags($_POST['apellido']);
+                $pass1 = strip_tags($_POST['pass1']);
+                $pass2 = strip_tags($_POST['pass2']);
+                
+                $cont = UsuarioModel::updUser($cod, $nombre, $apellido, $pass1);
+                if ($cont !== false) { 
+                    // Exito al actualizar
+                    $respuesta = "userAct";
+                    $encryp = base64_encode($respuesta);
+                    header('Location: ../perfil.php?m='.$encryp);
+                }else {
+                    // Error al actualizar
+                    $respuesta = "userErr";
+                    $encryp = base64_encode($respuesta);
+                    header('Location: ../perfil.php?m='.$encryp);
+                }
+                break;
             default:
                 # code...
                 break;
@@ -85,8 +106,38 @@ function mensaje($mensaje){
                 icon: "error"
                 });</script>';
             break;
+        case 'userAct':
+            echo '<script>swal.fire({
+                title: "Usuario Actualizado",
+                text: "Los datos del usuario han sido actualizados de forma correcta",
+                icon: "success"
+              });</script>';
+            # code...
+            break;
+        case 'userErr':
+            echo '<script>swal.fire({
+                title: "Error al Actualizar",
+                text: "Ha habido un error al momento de actualizar los datos",
+                icon: "error"
+                });</script>';
+            break;
+        case 'userNoPass':
+            echo '<script>swal.fire({
+                title: "Error al Actualizar",
+                text: "Las contraseñas no coinciden ",
+                icon: "error"
+                });</script>';
+            break;
         default:
             # code...
             break;
+    }
+}
+// Redireccion si ya el usuario esta loggeado
+function verificarLogin(){
+    // Si ya esta loggeado
+    session_start();
+    if (isset($_SESSION['Usuario'])) {
+        header("Location: admin.php");
     }
 }

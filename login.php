@@ -4,6 +4,8 @@ include 'controller/LoginController.php';
 include 'controller/ParametrosController.php';
 $pagina = 'Login';
 establecerTitulo($pagina);
+// Redireccion en caso de que este loggeado
+verificarLogin();
 // Contiene img de la app
 $logo = ParametrosController::logoUrl();
 $fondo = ParametrosController::fondoLoginUrl();
@@ -33,13 +35,13 @@ $fondo = ParametrosController::fondoLoginUrl();
                                             <label for="pass">Contreaseña</label>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <a class="small" href="password.html">¿Olvidaste tu Contraseña?</a>
+                                            <a class="small" href="mailto:20180505@miucateci.edu.do">¿Olvidaste tu Contraseña?</a>
                                             <button type="submit" class="btn btn-primary">Login</button>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="card-footer text-center py-3">
-                                    <div class="small"><a href="register.php">Need an account? Sign up!</a></div>
+                                    <div class="small"><a href="register.php">¿Necesitas una cuenta? Registrate aqui</a></div>
                                 </div>
                             </div>
                         </div>

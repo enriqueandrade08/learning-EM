@@ -70,4 +70,71 @@ class UsuarioModel{
         $conn->close();
 
     }
+
+    static function usuarioDetalle($id){
+        include 'Conexion.php';
+        $sql = "
+        SELECT 
+            a.nombre,
+            a.apellido,
+            a.correo,
+            a.fecha fnacimiento,
+            b.Descripcion nacionalidad
+        FROM 
+            usuarios a,
+            nacionalidad b
+        WHERE a.idUsuario = $id
+            AND a.estado = 'A'
+            AND b.idNacionalidad = a.nacionalidad
+            AND b.estado = 'A'
+        ";
+        $result = $conn->query($sql);
+        return $result;
+    }
+
+    static function nombreMenu($id){
+        include 'Conexion.php';
+        $sql = "
+        SELECT 
+            CONCAT(a.nombre,' ',a.apellido) nombre
+        FROM 
+            usuarios a
+        WHERE a.idUsuario = $id
+            AND a.estado = 'A'
+        ";
+        $result = $conn->query($sql);
+        return $result;
+    }
+
+    static function updUser($cod, $nombre, $apellido, $pass){
+        include 'Conexion.php';
+    
+        if ($pass !== "") {
+            $stmt = $conn->prepare("
+                UPDATE usuarios 
+                SET nombre = ?, 
+                    apellido = ?, 
+                    pass = ? 
+                WHERE idUsuario = ?
+            ");
+            $stmt->bind_param("sssi", $nombre, $apellido, $pass, $cod);
+        } else {
+            $stmt = $conn->prepare("
+                UPDATE usuarios 
+                SET nombre = ?, 
+                    apellido = ? 
+                WHERE idUsuario = ?
+            ");
+            $stmt->bind_param("ssi", $nombre, $apellido, $cod);
+        }
+    
+        $stmt->execute();
+    
+        // Verificar si la actualización fue exitosa
+        $filas_afectadas = $stmt->affected_rows;
+        $stmt->close();
+    
+        return $filas_afectadas;
+    }
+    
 }
