@@ -1,0 +1,123 @@
+body{
+    background-color: rgba(210, 210, 210, 0.572);
+
+}
+
+#titulo{
+    margin-left: 17.5%;
+    margin-top: 17%;
+   
+}
+
+
+#logo
+{
+    width: 75px;
+    margin-left: 10%;
+    margin-top: -8%;
+}
+
+.text{
+    margin-left: 17.4%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-top: -2%;
+    width: 24%;
+}
+
+button{
+    width: 130px;
+    background-color: rgb(46, 111, 180);
+    color: white;
+    margin-left: 19%;
+    margin-top: 3%;
+    padding: 8px;
+    border-radius: 5%;
+    box-shadow: 0px 0px 1px 1px;
+    color: rgb(151, 151, 151);
+}
+    
+
+button:hover{
+   
+    color: rgb(216, 216, 217)
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+a:hover{
+    color: rgb(203, 203, 203);
+}
+
+.imagen{
+    width: 350px;
+    height: 255px;
+    margin-top: -16%;
+    margin-left: 26%;
+    border-radius: 4%;
+    border-style: solid;
+    border-width: 2px;
+    color:  rgb(46, 111, 180);
+    box-shadow: 3px 3px 2px 2px;
+    color: rgb(151, 151, 151);
+}
+
+
+footer{
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: rgb(8, 8, 8);
+    padding-top: 30px;
+    color: white;
+    margin-top: 25%
+}
+
+
+.footer-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    
+}
+
+.redes{
+    
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.redes li{
+    margin: 0 55px;
+}
+
+.redes a{
+    text-decoration: none;
+    color: white;
+
+}
+
+.redes a i{
+    font-size: 35px;
+
+}
+
+.redes a:hover{
+    color: rgb(0, 255, 106);
+}
+
+.footer-a{
+    margin-left: 4%;
+    margin-top: 30px;
+    text-align: center;
+    padding: 13px 0;
+    font-size: 22px;
+
+}
