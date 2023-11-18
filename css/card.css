@@ -1,0 +1,18 @@
+h6{
+    font-size: 14px;
+}
+
+img{
+    width: 254px;
+    height: 190px;
+    border-top-right-radius: 3%;
+    border-top-left-radius: 3%;
+}
+
+p{
+    font-size: 11px;
+}
+
+button{
+    width: 50px;
+}
