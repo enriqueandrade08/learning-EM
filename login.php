@@ -1,6 +1,6 @@
 <?php 
 include 'theme/header.php'; 
-include 'controller/LoginController.php';
+include 'controller/UsuarioRegistroController.php';
 include 'controller/ParametrosController.php';
 $pagina = 'Login';
 establecerTitulo($pagina);
@@ -24,7 +24,7 @@ $fondo = ParametrosController::fondoLoginUrl();
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <form action="controller/LoginController.php" method="POST">
+                                    <form action="controller/UsuarioRegistroController.php" method="POST">
                                         <input type="hidden" name="tipo" value="R">
                                         <div class="form-floating mb-3">
                                             <input class="form-control" id="correo" name="correo" type="email" placeholder="name@example.com" />

@@ -1,6 +1,5 @@
 <?php
 include './model/ParametrosModel.php';
-// include '../model/ParametrosModel.php';
 
 
 class ParametrosController{

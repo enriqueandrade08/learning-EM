@@ -2,7 +2,7 @@
 include 'theme/header.php';
 include './controller/UsuarioController.php';
 include 'controller/ParametrosController.php';
-include 'controller/LoginController.php';
+include 'controller/UsuarioRegistroController.php';
 $pagina = 'Registro';
 establecerTitulo($pagina);
 // Verificar si el usuario esta loggeado
@@ -22,7 +22,7 @@ $fondo = ParametrosController::fondoLoginUrl();
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header"><h3 class="text-center font-weight-light my-4"><a href="login.php"><img src="<?php echo $logo?>"  alt="" width="10%"></a>Crear una Cuenta</h3></div>
                                 <div class="card-body">
-                                    <form action="controller/LoginController.php" method="POST" id="formaRegis" onsubmit="return valCon()">
+                                    <form action="controller/UsuarioRegistroController.php" method="POST" id="formaRegis" onsubmit="return valCon()">
                                         <input type="hidden" name="tipo" value="C">
                                         <div class="row mb-3">
                                             <div class="col-md-6">

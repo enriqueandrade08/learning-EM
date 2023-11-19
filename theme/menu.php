@@ -39,6 +39,47 @@ $nombre = UsuarioController::extraerNombreMenu($_SESSION['Usuario']);
             </ul>
         </nav>
         <div id="layoutSidenav">
+        <?php if($_SESSION['Privilegio']==1):?>
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Menú</div>
+                            <a class="nav-link" href="admin.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+
+                            <div class="sb-sidenav-menu-heading">Plataforma</div>
+                            <a class="nav-link" href="usuarios-mant.php">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
+                                Usuarios
+                            </a>
+
+                            <a class="nav-link" href="cursos-mant.php">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-book"></i></div>
+                                Cursos
+                            </a>
+
+                            <a class="nav-link" href="lecciones-mant.php">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-book-open"></i></div>
+                                Lecciones
+                            </a>
+
+                            
+                            <a class="nav-link" href="index.html">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-chart-line"></i></div>
+                                Estadisticas
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Sesion Iniciada:</div>
+                            <i class="fas fa-user fa-fw"></i> <?php echo $nombre?>
+                    </div>
+                </nav>
+            </div>
+        <?php else: ?>
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
@@ -78,5 +119,6 @@ $nombre = UsuarioController::extraerNombreMenu($_SESSION['Usuario']);
                     </div>
                 </nav>
             </div>
+        <?php endif; ?>
             <div id="layoutSidenav_content">
     

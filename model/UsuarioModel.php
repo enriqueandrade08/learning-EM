@@ -38,7 +38,7 @@ class UsuarioModel{
     static function login($correo, $contrasena){
         include 'Conexion.php';
         // Consulta para verificar las credenciales del usuario
-        $stmt = $conn->prepare("SELECT idUsuario, correo, pass FROM usuarios WHERE correo = ?");
+        $stmt = $conn->prepare("SELECT idUsuario, correo, pass, Privilegios FROM usuarios WHERE correo = ?");
         $stmt->bind_param("s", $correo);
         $stmt->execute();
         $stmt->store_result();
@@ -46,13 +46,14 @@ class UsuarioModel{
         $cont=0;
 
         if ($stmt->num_rows == 1) {
-            $stmt->bind_result($idUsuario_bd, $correo_db, $contrasena_db);
+            $stmt->bind_result($idUsuario_bd, $correo_db, $contrasena_db, $privilegios_db);
             $stmt->fetch();
             // Verificar la contraseña
             if ($contrasena == $contrasena_db) {
                 // Inicio de sesión exitoso
                 session_start();
                 $_SESSION['Usuario'] = $idUsuario_bd;
+                $_SESSION['Privilegio'] = $privilegios_db;
                 $cont = 1;
             } else{
                 // echo "Contraseña incorrecta";
@@ -135,6 +136,13 @@ class UsuarioModel{
         $stmt->close();
     
         return $filas_afectadas;
+    }
+
+    static function extraerUsuarios(){
+        include 'Conexion.php';
+        $sql="SELECT * from usuarios";
+        $result = $conn->query($sql);
+        return $result;
     }
     
 }

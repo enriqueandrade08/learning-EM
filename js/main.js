@@ -11,7 +11,7 @@ function addCamposPass(){
 function addInput(classDiv, name, dLabel, type, place){
     return `
     <div class="${classDiv}">
-        <label for="${name}" class="form-label">${dLabel}</label>  
+        <label for="${name}" class="form-label">${dLabel}<b style="color:red">*</b></label>  
         <input type="${type}" class="form-control" placeholder="${place}" name="${name}" id="${name}">
     </div>`;
 }
@@ -37,4 +37,31 @@ function valCon(event) {
     } else {
         document.getElementById("fperfil").submit();
     }
+}
+
+function contCaracteres(text,resp,maximoCaracteres){
+    const textarea = document.getElementById(text);
+    const contador = document.getElementById(resp);
+    const limiteCaracteres = maximoCaracteres;
+
+    // Agregar un evento de entrada al textarea
+    textarea.addEventListener('input', function () {
+        // Obtener el número de caracteres
+        const numCaracteres = textarea.value.length;
+
+        // Mostrar el contador
+        contador.textContent = `${numCaracteres} caracteres`;
+
+        // Opcional: Mostrar el límite y cambiar el color cuando se excede
+        if (limiteCaracteres) {
+            contador.textContent += ` (límite: ${limiteCaracteres})`;
+
+            if (numCaracteres > limiteCaracteres) {
+                contador.style.color = 'red';
+            } else {
+                contador.style.color = ''; // Restablecer el color
+            }
+        }
+    });
+   
 }
