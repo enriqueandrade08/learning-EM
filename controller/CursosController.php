@@ -33,4 +33,13 @@ class CursosController{
         return $datos;
     }
 
+    function cursosSelect(){
+        $cursos = CursosModel::extraerCursosAdmin();
+        if ($cursos->num_rows > 0) {
+            while($row = $cursos->fetch_assoc()) {
+                echo "<option value='{$row['idCurso']}'>{$row['nombreCurso']}</option>";
+            }
+        }
+    }
+
 }
