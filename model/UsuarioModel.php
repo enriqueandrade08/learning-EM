@@ -1,15 +1,18 @@
 <?php
 
-class UsuarioModel{
-    
-    function extraerNacionalidad(){
+class UsuarioModel
+{
+
+    function extraerNacionalidad()
+    {
         include 'Conexion.php';
         $sql = "SELECT * FROM nacionalidad ORDER BY Descripcion";
         $result = $conn->query($sql);
         return $result;
     }
 
-    static function insertUser($nombre,$apellido,$correo,$pass,$fecha,$nacionalidad){
+    static function insertUser($nombre, $apellido, $correo, $pass, $fecha, $nacionalidad)
+    {
         include 'Conexion.php';
         // Verificar si el correo ya está asignado a otro usuario
         // buscamos en la bd
@@ -28,22 +31,23 @@ class UsuarioModel{
         // Si no existe se insertara uno nuevo
         $privilegios = 2; // 2 ya que es estudiante
         $stmt2 = $conn->prepare("INSERT INTO usuarios (nombre, apellido, correo, pass, fecha, nacionalidad, Privilegios) VALUES (?, ?, ?, ?, ? ,? ,?)");
-        $stmt2->bind_param("sssssii",$nombre,$apellido,$correo,$pass,$fecha,$nacionalidad,$privilegios);
+        $stmt2->bind_param("sssssii", $nombre, $apellido, $correo, $pass, $fecha, $nacionalidad, $privilegios);
         $stmt2->execute();
         $stmt2->close();
 
-        return $cont;    
+        return $cont;
     }
 
-    static function login($correo, $contrasena){
+    static function login($correo, $contrasena)
+    {
         include 'Conexion.php';
         // Consulta para verificar las credenciales del usuario
-        $stmt = $conn->prepare("SELECT idUsuario, correo, pass, Privilegios FROM usuarios WHERE correo = ?");
+        $stmt = $conn->prepare("SELECT idUsuario, correo, pass, Privilegios FROM usuarios WHERE correo = ? AND estado = 'A'");
         $stmt->bind_param("s", $correo);
         $stmt->execute();
         $stmt->store_result();
-        
-        $cont=0;
+
+        $cont = 0;
 
         if ($stmt->num_rows == 1) {
             $stmt->bind_result($idUsuario_bd, $correo_db, $contrasena_db, $privilegios_db);
@@ -55,7 +59,7 @@ class UsuarioModel{
                 $_SESSION['Usuario'] = $idUsuario_bd;
                 $_SESSION['Privilegio'] = $privilegios_db;
                 $cont = 1;
-            } else{
+            } else {
                 // echo "Contraseña incorrecta";
                 $cont = 0;
             }
@@ -69,10 +73,10 @@ class UsuarioModel{
 
         $stmt->close();
         $conn->close();
-
     }
 
-    static function usuarioDetalle($id){
+    static function usuarioDetalle($id)
+    {
         include 'Conexion.php';
         $sql = "
         SELECT 
@@ -93,7 +97,8 @@ class UsuarioModel{
         return $result;
     }
 
-    static function nombreMenu($id){
+    static function nombreMenu($id)
+    {
         include 'Conexion.php';
         $sql = "
         SELECT 
@@ -107,9 +112,10 @@ class UsuarioModel{
         return $result;
     }
 
-    static function updUser($cod, $nombre, $apellido, $pass){
+    static function updUser($cod, $nombre, $apellido, $pass)
+    {
         include 'Conexion.php';
-    
+
         if ($pass !== "") {
             $stmt = $conn->prepare("
                 UPDATE usuarios 
@@ -128,21 +134,21 @@ class UsuarioModel{
             ");
             $stmt->bind_param("ssi", $nombre, $apellido, $cod);
         }
-    
+
         $stmt->execute();
-    
+
         // Verificar si la actualización fue exitosa
         $filas_afectadas = $stmt->affected_rows;
         $stmt->close();
-    
+
         return $filas_afectadas;
     }
 
-    static function extraerUsuarios(){
+    static function extraerUsuarios()
+    {
         include 'Conexion.php';
-        $sql="SELECT * from usuarios";
+        $sql = "SELECT * from usuarios";
         $result = $conn->query($sql);
         return $result;
     }
-    
 }

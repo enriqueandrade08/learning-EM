@@ -1,12 +1,16 @@
 <?php
-include './model/CursosModel.php';
+// include './model/CursosModel.php';
 
-class CursosController{
+class CursosController
+{
 
-    function cursosMant(){
+    function cursosMant()
+    {
+        include './model/CursosModel.php';
+
         $cursos = CursosModel::extraerCursosAdmin();
         if ($cursos->num_rows > 0) {
-            while($row = $cursos->fetch_assoc()) {
+            while ($row = $cursos->fetch_assoc()) {
                 echo "
                 <tr>
                     <td>{$row['idCurso']}</td>
@@ -25,21 +29,25 @@ class CursosController{
                 </tr>";
             }
         }
-    } 
+    }
 
-    static function cursosEditar($id){
+    static function cursosEditar($id)
+    {
+        include './model/CursosModel.php';
+
         $curso = CursosModel::extraerCursosDetalle($id);
         $datos = $curso->fetch_assoc();
         return $datos;
     }
 
-    function cursosSelect(){
+    function cursosSelect()
+    {
+        include './model/CursosModel.php';
         $cursos = CursosModel::extraerCursosAdmin();
         if ($cursos->num_rows > 0) {
-            while($row = $cursos->fetch_assoc()) {
+            while ($row = $cursos->fetch_assoc()) {
                 echo "<option value='{$row['idCurso']}'>{$row['nombreCurso']}</option>";
             }
         }
     }
-
 }

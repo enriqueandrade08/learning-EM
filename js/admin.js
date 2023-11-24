@@ -1,4 +1,4 @@
-function obtCodigo(cod,destino){
+function obtCodigo(cod, destino) {
     let codigo = cod
     // Crear un formulario dinámicamente
     var form = document.createElement('form');

@@ -1,12 +1,16 @@
 <?php
-include './model/LeccionesModel.php';
+// include './model/LeccionesModel.php';
 
-class LeccionesController{
+class LeccionesController
+{
 
-    function leccionesMant(){
+    function leccionesMant()
+    {
+        include './model/LeccionesModel.php';
+
         $lecciones = LeccionesModel::extraerLeccionesMant();
         if ($lecciones->num_rows > 0) {
-            while($row = $lecciones->fetch_assoc()) {
+            while ($row = $lecciones->fetch_assoc()) {
                 echo "
                 <tr>
                     <td>{$row['idLeccion']}</td>
@@ -25,12 +29,21 @@ class LeccionesController{
                 </tr>";
             }
         }
-    } 
+    }
 
-    static function leccionesEditar($id){
+    static function leccionesEditar($id)
+    {
+        include './model/LeccionesModel.php';
+
         $curso = LeccionesModel::extraerLeccionDetalle($id);
         $datos = $curso->fetch_assoc();
         return $datos;
     }
 
+    static function leccionesCurso($curso)
+    {
+        include '../model/LeccionesModel.php';
+        $lecciones = LeccionesModel::extraerLeccionesCurso($curso);
+        return $lecciones;
+    }
 }

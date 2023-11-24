@@ -3,30 +3,29 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['tipo'])) {
         // Incluyo el modelo a donde se procesaran los datos
-        include "../model/LeccionesModel.php";
+        include "../model/EjerciciosModel.php";
         $tipo = $_POST['tipo'];
         switch ($tipo) {
             case 'C':
                 // Proceso para crear nuevo curso
                 // Limpio las variables de html
                 $curso = strip_tags($_POST['curso']);
-                $modulo = strip_tags($_POST['nModulo']);
-                $titulo = strip_tags($_POST['titulo']);
-                $recurso = (isset($_POST['recurso'])) ? $_POST['recurso'] : '';
-                $descripcion = $_POST['descripcion'];
+                $leccion = strip_tags($_POST['leccion']);
+                $descripcion = strip_tags($_POST['descripcion']);
+                $resultado = $_POST['resultado']; // htmlspecialchars
                 // Hacemos el Insert 
-                $insert = LeccionesModel::insertarLeccion($curso, $modulo, $titulo, $recurso, $descripcion);
+                $insert = EjerciciosModel::insertarEjercicio($curso, $leccion, $descripcion, $resultado);
                 // Manejamos la respuesta
                 if ($insert) {
                     // Curso Insertado Correctamente
-                    $respuesta = "insLeccCorr";
+                    $respuesta = "insEjerCorr";
                     $encryp = base64_encode($respuesta);
-                    header('Location: ../lecciones-mant.php?m=' . $encryp);
+                    header('Location: ../ejercicios-mant.php?m=' . $encryp);
                 } else {
                     // Error al insertar curso
-                    $respuesta = "insLeccErr";
+                    $respuesta = "insEjerErr";
                     $encryp = base64_encode($respuesta);
-                    header('Location: ../lecciones-mant.php?m=' . $encryp);
+                    header('Location: ../ejercicios-mant.php?m=' . $encryp);
                 }
                 exit;
 
@@ -41,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $modulo = strip_tags($_POST['nModulo']);
                 $titulo = strip_tags($_POST['titulo']);
                 $recurso = (isset($_POST['recurso'])) ? strip_tags($_POST['recurso']) : '';
-                $descripcion = $_POST['descripcion'];
+                $descripcion = strip_tags($_POST['descripcion']);
                 // Hacemos el update
                 $cont = LeccionesModel::actualizarLeccion($codigo, $modulo, $titulo, $recurso, $descripcion);
                 // Manejamos la respuesta
@@ -68,18 +67,18 @@ function mensaje($mensaje)
 {
     $txt = base64_decode($mensaje);
     switch ($txt) {
-        case 'insLeccCorr':
+        case 'insEjerCorr':
             echo '<script>swal.fire({
-                title: "Leccion Insertado",
-                text: "La leccion se ha insertado de manera correcta",
+                title: "Ejercicio Insertado",
+                text: "El ejercicio se ha insertado de manera correcta",
                 icon: "success"
               });</script>';
             # code...
             break;
-        case 'insLeccErr':
+        case 'insEjerErr':
             echo '<script>swal.fire({
                 title: "Error al Crear",
-                text: "Ha habido un error al momento de crear la leccion. Intente nuevamente",
+                text: "Ha habido un error al momento de crear el ejercicio. Intente nuevamente",
                 icon: "error"
                 });</script>';
             break;

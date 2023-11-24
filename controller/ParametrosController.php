@@ -2,25 +2,26 @@
 include './model/ParametrosModel.php';
 
 
-class ParametrosController{
+class ParametrosController
+{
 
-  static function logoUrl(){
+  static function logoUrl()
+  {
     $query = ParametrosModel::extraerLogo();
     if ($query && $query->num_rows > 0) {
-        // Obtiene la primera fila del resultado
-        $logo = $query->fetch_assoc();
-        return $logo['logo'];
+      // Obtiene la primera fila del resultado
+      $logo = $query->fetch_assoc();
+      return $logo['logo'];
     }
   }
 
-  static function fondoLoginUrl(){
+  static function fondoLoginUrl()
+  {
     $query = ParametrosModel::extraerFondo();
     if ($query && $query->num_rows > 0) {
-        // Obtiene la primera fila del resultado
-        $fondo = $query->fetch_assoc();
-        return $fondo['fondo'];
+      // Obtiene la primera fila del resultado
+      $fondo = $query->fetch_assoc();
+      return $fondo['fondo'];
     }
   }
-  
 }
-
