@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 12px double #6d6d6d; 
+  
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+img{
+    width: 66px;
+    height: 56px;
+    margin-top: 1%;
+}
+
+h4{
+    font-weight: 1;
+    font-size: 25px;
+    margin-top: -5%;
+    margin-left: 8%;
+}
+
+
+p {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.firma {
+    text-align: center;
+    margin-top: 1%;
+}
+
+.linea {
+    margin-left: 37.3%;
+    width: 200px;
+    border-top: 1px solid #000;
+    margin-top: 20%;
+   
+  }
