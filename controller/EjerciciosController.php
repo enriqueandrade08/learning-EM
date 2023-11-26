@@ -1,11 +1,12 @@
 <?php
-include './model/EjerciciosModel.php';
+// include './model/EjerciciosModel.php';
 
 class EjerciciosController
 {
 
-    function leccionesMant()
+    function ejerciciosMant()
     {
+        include './model/EjerciciosModel.php';
         $ejercicios = EjerciciosModel::extraerEjerciciosMant();
         if ($ejercicios->num_rows > 0) {
             while ($row = $ejercicios->fetch_assoc()) {
@@ -26,6 +27,21 @@ class EjerciciosController
                         </a>
                     </td>
                 </tr>";
+            }
+        }
+    }
+
+    function ejerciciosLeccion($curso, $leccion)
+    {
+        include_once '../model/EjerciciosModel.php';
+        $ejercicios = EjerciciosModel::extraerEjercicioLeccion($curso, $leccion);
+        if ($ejercicios->num_rows > 0) {
+            while ($row2 = $ejercicios->fetch_assoc()) {
+                echo "
+                        <div class=''>
+                            ¿{$row2['descripcion']}?
+                            <input>
+                        </div>";
             }
         }
     }

@@ -50,4 +50,13 @@ class CursosController
             }
         }
     }
+
+    static function cabezaCursos($id)
+    {
+        include '../model/CursosModel.php';
+
+        $curso = CursosModel::extraerCursosDetalle($id);
+        $datos = $curso->fetch_assoc();
+        return $datos;
+    }
 }

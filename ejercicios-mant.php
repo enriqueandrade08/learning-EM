@@ -1,15 +1,15 @@
-<?php 
-include 'theme/menu.php'; 
+<?php
+include 'theme/menu.php';
 include  'controller/EjerciciosController.php';
 // include 'controller/EjerciciosRegistroController.php';
 $pagina = 'Mantenimiento Ejercicios';
 establecerTitulo($pagina);
 // Seguro para que solo entre el admin o user con privilegio 1
 $usuarios = new UsuarioController();
-$usuarios -> usuarioPrivilegios($_SESSION['Privilegio']);
+$usuarios->usuarioPrivilegios($_SESSION['Privilegio']);
 
 $ejercicios = new EjerciciosController();
-?>            
+?>
 <div class="container-fluid px-4">
     <h1 class="mt-4"><?php echo $pagina ?></h1>
     <ol class="breadcrumb mb-4">
@@ -39,7 +39,7 @@ $ejercicios = new EjerciciosController();
                 </thead>
                 <tbody>
                     <?php
-                        $ejercicios -> leccionesMant();
+                    $ejercicios->ejerciciosMant();
                     ?>
                 </tbody>
             </table>
@@ -48,4 +48,6 @@ $ejercicios = new EjerciciosController();
 </div>
 <script src="js/admin.js"></script>
 <?php include 'theme/footer.php'; ?>
-<?php  if (isset($_GET['m'])) {mensaje($_GET['m']) ;} ?>
+<?php if (isset($_GET['m'])) {
+    mensaje($_GET['m']);
+} ?>

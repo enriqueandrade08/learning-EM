@@ -36,6 +36,19 @@ class EjerciciosModel
         return $response;
     }
 
+    static function extraerEjercicioLeccion($curso, $leccion)
+    {
+        include 'Conexion.php';
+        $sql = "
+        SELECT a.* FROM ejercicios a
+        WHERE a.idCurso = $curso
+            AND a.idLeccion = $leccion
+            AND a.estado = 'A'
+        ";
+        $result = $conn->query($sql);
+        return $result;
+    }
+
     /*
 
     static function actualizarLeccion($codigo,$modulo,$titulo,$recurso,$descripcion){

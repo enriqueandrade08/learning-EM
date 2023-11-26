@@ -82,4 +82,18 @@ class LeccionesModel
         $result = $conn->query($sql);
         return $result;
     }
+
+    static function extraerLeccionesCursoTodo($curso)
+    {
+        include 'Conexion.php';
+        $sql = "
+        SELECT a.*
+        FROM  
+            leccion a
+        WHERE a.estado = 'A'
+            AND a.idCurso = $curso
+        ";
+        $result = $conn->query($sql);
+        return $result;
+    }
 }

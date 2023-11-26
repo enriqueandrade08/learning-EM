@@ -46,4 +46,11 @@ class LeccionesController
         $lecciones = LeccionesModel::extraerLeccionesCurso($curso);
         return $lecciones;
     }
+
+    static function leccionesCursoTodo($curso)
+    {
+        include '../model/LeccionesModel.php';
+        $lecciones = LeccionesModel::extraerLeccionesCursoTodo($curso);
+        return $lecciones;
+    }
 }
