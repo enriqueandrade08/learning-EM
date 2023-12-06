@@ -49,6 +49,16 @@ class EjerciciosModel
         return $result;
     }
 
+    static function extraerCantidadEjercicios()
+    {
+        include 'Conexion.php';
+        $sql = "
+        SELECT COUNT(idEjercicio) cantEjercicio FROM ejercicios
+        WHERE estado = 'A'
+        ";
+        $result = $conn->query($sql);
+        return $result;
+    }
     /*
 
     static function actualizarLeccion($codigo,$modulo,$titulo,$recurso,$descripcion){

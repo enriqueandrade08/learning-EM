@@ -31,19 +31,43 @@ class EjerciciosController
         }
     }
 
-    function ejerciciosLeccion($curso, $leccion)
+    function ejerciciosLeccion($curso, $leccion, $inscrito, $verificacion)
     {
         include_once '../model/EjerciciosModel.php';
         $ejercicios = EjerciciosModel::extraerEjercicioLeccion($curso, $leccion);
         if ($ejercicios->num_rows > 0) {
+            echo "<form id='form$leccion'>
+                    <input type='hidden' name='curso' id='curso' value='$curso'>
+                    <input type='hidden' name='leccion' id='leccion' value='$leccion'>
+                    <input type='hidden' name='inscrito' id='inscrito' value='$inscrito'>";
             while ($row2 = $ejercicios->fetch_assoc()) {
+                $control = ($verificacion == 'C') ? "value='" . htmlspecialchars($row2['resultado']) . "' readonly" : "";
                 echo "
-                        <div class=''>
-                            ¿{$row2['descripcion']}?
-                            <input>
-                        </div>";
+                <div class='p-2'>
+                    ¿" . htmlspecialchars($row2['descripcion']) . "?
+                    <input name='e{$row2['idEjercicio']}' id='e{$row2['idEjercicio']}' $control>
+                </div>
+            ";
             }
+            echo "
+                <div>";
+            if ($verificacion == 'C') {
+                echo "<button type='button' class='btn btn-success mt-2' disabled>Completado</button>";
+            } else {
+                echo "<button type='button' class='btn btn-success mt-2' onclick='enviarRespuestas(this.form)'>Enviar Respuestas</button>";
+            }
+            echo "
+                </div>
+            </form>";
         }
+    }
+
+    function mostrarCantidadEjercicios()
+    {
+        include './model/EjerciciosModel.php';
+        $ejercicios = EjerciciosModel::extraerCantidadEjercicios();
+        $datos = $ejercicios->fetch_array()['cantEjercicio'];
+        echo $datos;
     }
     /*
     static function leccionesEditar($id){

@@ -75,8 +75,13 @@ $nombre = UsuarioController::extraerNombreMenu($_SESSION['Usuario']);
                                 Ejercicios
                             </a>
 
+                            <a class="nav-link" href="reportes.php">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-file"></i></div>
+                                Reportes
+                            </a>
+
                             <div class="sb-sidenav-menu-heading">Vista Estudiante</div>
-                            <a class="nav-link" href="vista-curso.php">
+                            <a class="nav-link" href="curso-vista.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Vista Curso
                             </a>
@@ -100,23 +105,23 @@ $nombre = UsuarioController::extraerNombreMenu($_SESSION['Usuario']);
                             </a>
 
                             <div class="sb-sidenav-menu-heading">Mi progreso</div>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="cursos-inscritos.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 Mis cursos
                             </a>
 
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="cursos-terminados.php">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-award fa-lg"></i></div>
                                 Diplomas
                             </a>
 
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="progreso.php">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-flag-checkered"></i></div>
                                 Progreso
                             </a>
 
                             <div class="sb-sidenav-menu-heading">Plataforma</div>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="cursos-agregar.php">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-cart-plus"></i></div>
                                 Añadir cursos
                             </a>

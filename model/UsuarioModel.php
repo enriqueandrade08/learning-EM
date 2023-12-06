@@ -151,4 +151,18 @@ class UsuarioModel
         $result = $conn->query($sql);
         return $result;
     }
+
+    static function contUser($privilegios)
+    {
+        include 'Conexion.php';
+        // Solo cuenta a los estudiantes
+        if ($privilegios == 1) {
+            $sql = "
+            SELECT COUNT(a.idUsuario) cantUser FROM usuarios a
+            WHERE a.estado = 'A'
+                AND a.Privilegios = 2 ";
+            $result = $conn->query($sql);
+            return $result;
+        }
+    }
 }

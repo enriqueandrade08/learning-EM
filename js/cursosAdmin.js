@@ -8,11 +8,11 @@ function cargarCurso() {
         body: formData
     })
         .then(function (response) {
-            // console.log(response);
+            console.log(response);
             return response.text();
         })
         .then(function (body) {
-            // console.log(body);
+            console.log(body);
             document.getElementById('resp').innerHTML = body;
         });
 }

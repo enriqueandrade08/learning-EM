@@ -53,4 +53,12 @@ class LeccionesController
         $lecciones = LeccionesModel::extraerLeccionesCursoTodo($curso);
         return $lecciones;
     }
+
+    function mostrarCantidadLecciones()
+    {
+        include './model/LeccionesModel.php';
+        $lecciones = LeccionesModel::extraerCantidadLecciones();
+        $datos = $lecciones->fetch_assoc()['cantLeccion'];
+        echo $datos;
+    }
 }

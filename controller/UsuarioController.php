@@ -59,4 +59,15 @@ class UsuarioController
       echo "<script>location.href ='admin.php';</script>";
     }
   }
+
+  function mostrarCantUser($privilegio)
+  {
+    $cantidad = UsuarioModel::contUser($privilegio);
+    $datos = $cantidad->fetch_assoc()['cantUser'];
+    if ($cantidad->num_rows > 0) {
+      echo $datos;
+    } else {
+      echo 0;
+    }
+  }
 }

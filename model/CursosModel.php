@@ -1,19 +1,35 @@
 <?php
 
-class CursosModel{
-    
-    static function extraerCursosAdmin(){
+class CursosModel
+{
+
+    static function extraerCursosAdmin()
+    {
         include 'Conexion.php';
         $sql = "
             SELECT * FROM cursos
+            WHERE estado = 'A'
         ";
         $result = $conn->query($sql);
         return $result;
     }
 
-    static function insertarCurso($nombre,$descripcion,$imagen){
+    static function extraerCursosAdminlimit3()
+    {
         include 'Conexion.php';
-        $estado = 'A'; 
+        $sql = "
+            SELECT * FROM cursos
+            ORDER BY idCurso desc
+            LIMIT 3
+        ";
+        $result = $conn->query($sql);
+        return $result;
+    }
+
+    static function insertarCurso($nombre, $descripcion, $imagen)
+    {
+        include 'Conexion.php';
+        $estado = 'A';
         $stmt = $conn->prepare("
             INSERT INTO cursos (nombreCurso, imagen, descripcionCurso, estado)    
             VALUES (?, ?, ?, ?)
@@ -21,10 +37,11 @@ class CursosModel{
         $stmt->bind_param("ssss", $nombre, $imagen, $descripcion, $estado);
         $response = $stmt->execute();
         $stmt->close();
-        return $response;  
+        return $response;
     }
 
-    static function actualizarCurso($codigo,$nombre,$descripcion,$imagen){
+    static function actualizarCurso($codigo, $nombre, $descripcion, $imagen)
+    {
         include 'Conexion.php';
         $stmt = $conn->prepare("
             UPDATE cursos 
@@ -41,7 +58,8 @@ class CursosModel{
         return $filas_afectadas;
     }
 
-    static function extraerCursosDetalle($id){
+    static function extraerCursosDetalle($id)
+    {
         include 'Conexion.php';
         $sql = "
         SELECT * FROM cursos
@@ -49,6 +67,17 @@ class CursosModel{
             AND estado = 'A'
         ";
         $result = $conn->query($sql);
-        return $result;   
+        return $result;
+    }
+
+    static function extraerCantidadCursos()
+    {
+        include 'Conexion.php';
+        $sql = "
+        SELECT COUNT(idCurso) cantCursos FROM cursos 
+        WHERE estado = 'A'
+        ";
+        $result = $conn->query($sql);
+        return $result;
     }
 }

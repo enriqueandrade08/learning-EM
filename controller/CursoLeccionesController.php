@@ -3,10 +3,9 @@ include '../controller/CursosController.php';
 include '../controller/LeccionesController.php';
 include '../controller/EjerciciosController.php';
 
-$c = 1;
-if ($c == 1) {
+if ($_POST['curso']) {
 
-    $curso = 1; // $_POST['curso'];
+    $curso = $_POST['curso'];
     $cabeza = CursosController::cabezaCursos($curso);
     $img = $cabeza['imagen'];
     $titulo = $cabeza['nombreCurso'];
@@ -22,7 +21,7 @@ if ($c == 1) {
         <div class='col-md-8 my-auto'>
             <h1>$titulo</h1>
             <br>
-            <p>$descrip</p>
+            <p>" . nl2br(htmlspecialchars($descrip)) . "</p>
         </div>
     </div>
     <br>
@@ -44,21 +43,14 @@ if ($c == 1) {
             </h2>
             <div id='$uniqueId' class='accordion-collapse collapse' aria-labelledby='heading{$counter}' data-bs-parent='#accordionExample'>
                 <div class='accordion-body'>
-                    " . htmlspecialchars($row['descripcion']) . "
+                    " . nl2br(htmlspecialchars($row['descripcion'])) . "
                     <div class='mt-2'>
                     ";
-            /* if ($row['Recurso']) {
-                echo "
-                    <div>
-                        <iframe src='{$row['Recurso']}' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' allowfullscreen></iframe>
-                    </div>";
-            }*/
+            if ($row['Recurso']) {
+                echo $row['Recurso'];
+            }
             echo "</div>";
-            $ejercicios->ejerciciosLeccion($curso, $row['idLeccion']);
-            echo "
-                    <div>
-                        <button type='button' class='btn btn-success mt-2'>Enviar Respuestas</button>
-                    </div>";
+            $ejercicios->ejerciciosLeccion($curso, $row['idLeccion'], null, null);
             echo "        
                 </div>
             </div>

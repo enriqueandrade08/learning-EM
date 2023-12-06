@@ -96,4 +96,15 @@ class LeccionesModel
         $result = $conn->query($sql);
         return $result;
     }
+
+    static function extraerCantidadLecciones()
+    {
+        include 'Conexion.php';
+        $sql = "
+        SELECT COUNT(idLeccion) cantLeccion FROM leccion 
+        WHERE estado = 'A'
+        ";
+        $result = $conn->query($sql);
+        return $result;
+    }
 }
